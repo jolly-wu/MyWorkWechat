@@ -80,7 +80,7 @@ export class ContactPage extends React.Component {
                     title: item.name,
                 },
             });
-
+            
             this.props.navigation.dispatch(pushAction);
         }
     }
