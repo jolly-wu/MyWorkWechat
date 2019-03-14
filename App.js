@@ -12,7 +12,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { AppContainer } from './route/route'
 import { MainTabPage } from './UI/mainTabPage'
-
+import { LoginPage } from './UI/loginPage'
 export default class App extends Component {
 
   login() {
@@ -24,7 +24,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <MainTabPage />
+      <AppContainer />
     );
   }
 }
