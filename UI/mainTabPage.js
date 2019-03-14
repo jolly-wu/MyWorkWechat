@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Image, Text, View, Easing, Animated, } from 'react-native';
+import { Platform, StyleSheet, Button, Image, Text, View, Easing, Animated, } from 'react-native';
 import { createBottomTabNavigator, createStackNavigator, createAppContainer, TabNavigator } from 'react-navigation';
 import { BottomTabBar } from 'react-navigation-tabs';
 import { AppStyle } from './theme'
@@ -9,43 +9,67 @@ import { WorkBenchPage } from './workbenchPage'
 import { MinePage } from './minePage'
 import { DepartmentContactPage } from './contact/departmentContactPage'
 import { NavBackButton } from './navBackButton'
+import { NavTitleLabel } from './navTitleLabel'
+import { RowWidgetContainer } from './rowWidgetContainer'
+import { ImageButton } from './imageButton'
+
+const TabName = {
+    Message: '消息',
+    Contact: '通讯录',
+    WorkBench: '工作台',
+    Mine: '我'
+}
+
 const TabbarContainer = createAppContainer(
     createBottomTabNavigator(
         {
-            Message: createStackNavigator({
-                Message: {
+            '消息': createStackNavigator({
+                '消息': {
                     screen: MessagePage,
                     headerMode: 'screen',
                     mode: Platform.OS === 'ios' ? 'modal' : 'card',
-                    navigationOptions: () => ({
-                        headerStyle: {
-                            backgroundColor: AppStyle.tintColor,
-                        },
-                        title: '消息',
-                        headerTintColor: '#ffffff',
-                        headerTitleStyle: {
-                            fontWeight: 'normal',
-                        },
-                    }),
+                    navigationOptions: (navigator) => {
+                        return {
+                            headerLeft: <NavTitleLabel title={TabName.Message} />,
+                            headerRight: <RowWidgetContainer children={[
+                                <ImageButton
+                                    image={require('../asserts/more_search.png')}
+                                />,
+                                <ImageButton
+                                    image={require('../asserts/add_emotion.png')}
+                                />,
+
+                            ]} />,
+                            headerStyle: {
+                                backgroundColor: AppStyle.tintColor,
+                            },
+                            headerTintColor: '#ffffff'
+                        }
+                    },
                 },
             }
             ),
-            Contact: createStackNavigator({
+            '通讯录': createStackNavigator({
                 Contact: {
                     screen: ContactPage,
                     headerMode: 'screen',
                     mode: Platform.OS === 'ios' ? 'modal' : 'card',
                     navigationOptions: (navigator) => {
-
                         return {
+                            headerLeft: <NavTitleLabel title='中控智慧' />,
+                            headerRight: <RowWidgetContainer children={[
+                                <ImageButton
+                                    image={require('../asserts/more_search.png')}
+                                />,
+                                <ImageButton
+                                    image={require('../asserts/tab_app_active.png')}
+                                />,
+
+                            ]} />,
                             headerStyle: {
                                 backgroundColor: AppStyle.tintColor,
                             },
-                            title: '联系人',
-                            headerTintColor: '#ffffff',
-                            headerTitleStyle: {
-                                fontWeight: 'normal',
-                            },
+                            headerTintColor: '#ffffff'
                         }
                     },
                 },
@@ -101,46 +125,49 @@ const TabbarContainer = createAppContainer(
                     // }),
                 }
             ),
-            WorkBench: createStackNavigator({
+            '工作台': createStackNavigator({
                 WorkBench: {
                     screen: WorkBenchPage,
                     headerMode: 'screen',
                     mode: Platform.OS === 'ios' ? 'modal' : 'card',
-                    navigationOptions: () => ({
-                        headerStyle: {
-                            backgroundColor: AppStyle.tintColor,
-                        },
-                        title: '工作台',
-                        headerTintColor: '#ffffff',
-                        headerTitleStyle: {
-                            fontWeight: 'normal',
-                        },
-                    }),
+                    navigationOptions: (navigator) => {
+                        return {
+                            headerLeft: <NavTitleLabel title={TabName.WorkBench} />,
+                            headerStyle: {
+                                backgroundColor: AppStyle.tintColor,
+                            },
+                            headerRight: <RowWidgetContainer children={[
+                                <ImageButton
+                                    image={require('../asserts/tab_app_active.png')}
+                                />,
+
+                            ]} />,
+                        }
+                    },
                 },
             }
             ),
-            Mine: createStackNavigator({
+            '我': createStackNavigator({
                 Mine: {
                     screen: MinePage,
                     headerMode: 'screen',
                     mode: Platform.OS === 'ios' ? 'modal' : 'card',
-                    navigationOptions: () => ({
-                        headerStyle: {
-                            backgroundColor: AppStyle.tintColor,
-                        },
-                        title: '工作台',
-                        headerTintColor: '#ffffff',
-                        headerTitleStyle: {
-                            fontWeight: 'normal',
-                        },
-                    }),
+                    navigationOptions: (navigator) => {
+                        return {
+                            headerLeft: <NavTitleLabel title={TabName.Mine} />,
+                            headerStyle: {
+                                backgroundColor: AppStyle.tintColor,
+                            },
+                            headerTintColor: '#ffffff'
+                        }
+                    },
                 },
             }
             ),
         },
         {
             backBehavior: 'none',
-            initialRouteName: 'Message',
+            initialRouteName: '消息',
             tabBarOptions: {
                 activeTintColor: '#5599ff',
                 style: {
@@ -164,22 +191,22 @@ const TabbarContainer = createAppContainer(
             defaultNavigationOptions: ({ navigation }) => ({
                 tabBarIcon: ({ focused, tintColor }) => {
                     const { routeName } = navigation.state;
-                    if (routeName === 'Message') {
+                    if (routeName === TabName.Message) {
                         return <Image source={focused ? require('../asserts/tab_message_active.png') : require('../asserts/tab_message_normal.png')}
                             style={{ width: 26, height: 26, tintColor: tintColor }}
                         />;
                     }
-                    if (routeName === 'Contact') {
+                    if (routeName === TabName.Contact) {
                         return <Image source={focused ? require('../asserts/tab_department_active.png') : require('../asserts/tab_department_normal.png')}
                             style={{ width: 26, height: 26, tintColor: tintColor }}
                         />;
                     }
-                    if (routeName === 'WorkBench') {
+                    if (routeName === TabName.WorkBench) {
                         return <Image source={focused ? require('../asserts/tab_app_active.png') : require('../asserts/tab_app_default.png')}
                             style={{ width: 26, height: 26, tintColor: tintColor }}
                         />;
                     }
-                    if (routeName === 'Mine') {
+                    if (routeName === TabName.Mine) {
                         return <Image source={focused ? require('../asserts/tab_me_active.png') : require('../asserts/tab_me_default.png')}
                             style={{ width: 26, height: 26, tintColor: tintColor }}
                         />;

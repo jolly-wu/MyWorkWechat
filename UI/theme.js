@@ -34,7 +34,8 @@ export const AppStyle = {
     smContentFontSize: 12,
     smContentColor: 'gray',
 
-    backSectionColor: '#f2f3f5'
+    backSectionColor: '#f2f3f5',
+    backgroundColor: '#f2f3f5'
 }
 
 

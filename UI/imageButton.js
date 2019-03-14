@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, TouchableOpacity, Image, StyleSheet, Text, View } from 'react-native';
 
-export class NavBackButton extends React.Component {
+export class ImageButton extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -13,10 +13,10 @@ export class NavBackButton extends React.Component {
                 onPress={this.props.onTapped}
             >
                 <Image
-                    source={require('../asserts/back_arrow.png')}
+                    source={this.props.image}
+                    resizeMode='center'
                     style={{ width: 20, height: 20, tintColor: 'white', alignSelf: 'center' }}
                 />
-                <Text style={{ alignSelf: 'center', color: 'white', fontWeight: 'bold', fontSize: 16, }}>{this.props.title}</Text>
             </TouchableOpacity>
         );
     }
