@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'beeshell'
-import { Platform, StyleSheet, View, Image, Text } from 'react-native';
+import { Platform, StyleSheet, View, Image, Text, TouchableHighlight } from 'react-native';
 import { AppStyle } from './theme';
 
 export class CommonCell extends React.Component {
@@ -19,13 +19,15 @@ export class CommonCell extends React.Component {
     }
     render() {
         return (
-            <View style={commonCellStyles.container}>
-                <Image source={this.props.tagImage} />
-                <Text style={commonCellStyles.title}>{this.props.bigTitle}</Text>
-                {
-                    this.renderIndicator()
-                }
-            </View>
+            <TouchableHighlight onPress={this.props.onTap} underlayColor="gray">
+                <View style={commonCellStyles.container}>
+                    <Image source={this.props.tagImage} />
+                    <Text style={commonCellStyles.title}>{this.props.bigTitle}</Text>
+                    {
+                        this.renderIndicator()
+                    }
+                </View>
+            </TouchableHighlight>
         );
     }
 }

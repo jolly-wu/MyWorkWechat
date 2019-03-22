@@ -2,8 +2,14 @@ import React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import { Longlist } from 'beeshell';
 import { CommonCell } from './commonCell'
+import { createStackNavigator, createAppContainer, NavigationActions, StackActions } from 'react-navigation';
+
 export class WorkBenchPage extends React.Component {
-    state = { items: [1, 2, 3], align: '' }
+    constructor(props) {
+        super(props)
+        this.onItemClick.bind(this);
+    }
+    state = { items: [1], align: '' }
     onRefresh = (param) => {
         var promise = new Promise(function (resolve, reject) {
             // 异步处理
@@ -12,11 +18,23 @@ export class WorkBenchPage extends React.Component {
         });
         return promise
     }
+
+    onItemClick = () => {
+        const pushAction = StackActions.push({
+            routeName: 'WebPage',
+            params: {
+                title: "Github",
+                url: 'https://github.com/facebook/react-native'
+            },
+        });
+        this.props.navigation.dispatch(pushAction);
+    }
     onRenderItem(item, index) {
-        return (//遍历字典数组
+        return (
             <CommonCell tagImage={require('../asserts/share_web_wechat.png')}
-                bigTitle='客户'
+                bigTitle='Github'
                 showIndicator={true}
+                onTap={this.onItemClick}
             />
         )
     }

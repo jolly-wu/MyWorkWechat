@@ -12,7 +12,7 @@ import { NavBackButton } from './navBackButton'
 import { NavTitleLabel } from './navTitleLabel'
 import { RowWidgetContainer } from './rowWidgetContainer'
 import { ImageButton } from './imageButton'
-
+import { IWebView } from './components/IWebView'
 const TabName = {
     Message: '消息',
     Contact: '通讯录',
@@ -145,6 +145,25 @@ const TabbarContainer = createAppContainer(
                         }
                     },
                 },
+                WebPage: {
+                    screen: IWebView,
+                    headerMode: 'screen',
+                    mode: Platform.OS === 'ios' ? 'modal' : 'card',
+                    navigationOptions: (navigator) => {
+                        return {
+                            headerLeft: <NavBackButton onTapped={() => {
+                                navigator.navigation.goBack()
+                            }} title={navigator.navigation.state.params.title} />,
+                            headerStyle: {
+                                backgroundColor: AppStyle.tintColor,
+                            },
+                            headerTintColor: '#ffffff',
+                            headerTitleStyle: {
+                                fontWeight: 'normal',
+                            },
+                        }
+                    },
+                }
             }
             ),
             '我': createStackNavigator({
