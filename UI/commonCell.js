@@ -13,7 +13,9 @@ export class CommonCell extends React.Component {
             return (
                 <Text style={{
                     fontSize: 14, color: 'gray', alignSelf: 'center',
-                }}>></Text>
+                }}>
+                    >
+                </Text>
             )
         }
     }
@@ -57,5 +59,4 @@ commonCellStyles = StyleSheet.create({
         marginLeft: 20,
         height: 55,
     },
-
 });

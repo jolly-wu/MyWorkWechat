@@ -2,7 +2,13 @@ package com.demo;
 
 import android.app.Application;
 
+import com.demo.MyPackage.MyFeaturePackage;
 import com.facebook.react.ReactApplication;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
+import com.github.reactnativecommunity.location.RNLocationPackage;
+import com.kiwi.reversegeocode.RNReverseGeocodePackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -23,8 +29,14 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new RNGestureHandlerPackage()
+              new MyFeaturePackage(),
+              new MainReactPackage(),
+            new RNI18nPackage(),
+            new ReactNativePushNotificationPackage(),
+            new RNLocationPackage(),
+            new RNReverseGeocodePackage(),
+            new RNCameraPackage(),
+              new RNGestureHandlerPackage()
       );
     }
 
